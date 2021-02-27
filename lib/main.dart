@@ -502,6 +502,7 @@ class _MyHomePageState extends State<NumberOneClass> {
             child: Container(
               height: MediaQuery.of(context).size.height,
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Expanded(
                     child: ListView(
@@ -543,7 +544,27 @@ class _MyHomePageState extends State<NumberOneClass> {
                       ],
                     ),
                   ),
-
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.02,
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: this._appBorder(width: 0.9),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 10,
+                      horizontal: 20,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        this._appIcons(Icons.lightbulb_outline_sharp, null, iconColor: Colors.blue, size: 25,),
+                        this._appIcons(Icons.qr_code_outlined, null, iconColor: Colors.blue, size: 25,),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
