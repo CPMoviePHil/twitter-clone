@@ -1,14 +1,12 @@
-import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:first_flutter/homepage.dart';
-import 'package:first_flutter/searchpage.dart';
+import 'package:first_flutter/main_lib/common_screen_package.dart';
+import 'package:first_flutter/main_screen/export_screen.dart';
+import 'package:first_flutter/main_lib/export_lib.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     const PrimaryColor = const Color.fromRGBO(0, 0, 0, 1);
@@ -60,60 +58,6 @@ class _MyHomePageState extends State<NumberOneClass> {
     LeftBarItems(null, "說明中心"),
   ];
 
-  Widget _imageContent(imageOnePath) {
-    return CachedNetworkImage(
-      imageUrl: imageOnePath,
-      imageBuilder: (context, imageProvider) => Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(50.0),
-          ),
-          image: DecorationImage(
-            image: imageProvider,
-          ),
-        ),
-      ),
-      placeholder: (context, url) => CircularProgressIndicator(),
-      errorWidget: (context, url, error) => Icon(Icons.error),
-    );
-  }
-
-  Widget _appText(String text, {Color fontColor = Colors.white, double fontSize = 18}) {
-    return Text(
-      "$text",
-      style: TextStyle(
-        fontSize: fontSize,
-        color: fontColor,
-      ),
-    );
-  }
-
-  Widget _appIcons(
-    IconData icon,
-    Function onChange, {
-    Color iconColor = Colors.white,
-    double size = 20,
-  }) {
-    return InkWell(
-      onTap: onChange,
-      child: Icon(
-        icon,
-        color: iconColor,
-        size: size,
-      ),
-    );
-  }
-
-  BorderSide _appBorder({
-    double width = 0.2,
-    Color color = const Color.fromRGBO(61, 65, 69, 1),
-  }) {
-    return BorderSide(
-      width: width,
-      color: color,
-    );
-  }
-
   Widget _personalProfile(String onlineImage) {
     return Container(
       child: Column(
@@ -122,7 +66,9 @@ class _MyHomePageState extends State<NumberOneClass> {
           Container(
             child: CircleAvatar(
               child: Container(
-                child: this._imageContent(this._onlineAvatarPath),
+                child: AppLibScreen.imageContent(
+                  this._onlineAvatarPath,
+                ),
               ),
             ),
           ),
@@ -138,24 +84,30 @@ class _MyHomePageState extends State<NumberOneClass> {
                   children: [
                     Row(
                       children: [
-                        this._appText(
+                        AppLibScreen.appText(
                           "黃智輝",
                         ),
                         SizedBox(
                           width: 5,
                         ),
-                        this._appIcons(
+                        AppLibScreen.appIcons(
                           Icons.lock,
                           null,
                         ),
                       ],
                     ),
-                    this._appIcons(Icons.keyboard_arrow_down_sharp, null,
-                        iconColor: Colors.blue),
+                    AppLibScreen.appIcons(
+                      Icons.keyboard_arrow_down_sharp,
+                      null,
+                      iconColor: Colors.blue,
+                    ),
                   ],
                 ),
-                subtitle: this._appText("@cpmoviephil",
-                    fontColor: Colors.grey, fontSize: 15),
+                subtitle: AppLibScreen.appText(
+                  "@cpmoviephil",
+                  fontColor: Colors.grey,
+                  fontSize: 15,
+                ),
               ),
             ),
           ),
@@ -163,22 +115,22 @@ class _MyHomePageState extends State<NumberOneClass> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                this._appText("166"),
+                AppLibScreen.appText("166"),
                 SizedBox(
                   width: 5,
                 ),
-                this._appText(
+                AppLibScreen.appText(
                   "個跟隨中",
                   fontColor: Colors.grey,
                 ),
                 SizedBox(
                   width: 15,
                 ),
-                this._appText("40"),
+                AppLibScreen.appText("40"),
                 SizedBox(
                   width: 5,
                 ),
-                this._appText(
+                AppLibScreen.appText(
                   "個跟隨者",
                   fontColor: Colors.grey,
                 ),
@@ -210,7 +162,7 @@ class _MyHomePageState extends State<NumberOneClass> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            this._appIcons(
+            AppLibScreen.appIcons(
               item.icon,
               null,
               size: 25,
@@ -219,7 +171,7 @@ class _MyHomePageState extends State<NumberOneClass> {
             SizedBox(
               width: 12,
             ),
-            this._appText(
+            AppLibScreen.appText(
               item.leftBarItemsName,
             ),
           ],
@@ -231,7 +183,7 @@ class _MyHomePageState extends State<NumberOneClass> {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            this._appText(
+            AppLibScreen.appText(
               item.leftBarItemsName,
             ),
           ],
@@ -252,7 +204,7 @@ class _MyHomePageState extends State<NumberOneClass> {
   }
 
   Widget _homePageAppBar() {
-    return this._appText("首頁", fontSize: 25);
+    return AppLibScreen.appText("首頁", fontSize: 25);
   }
 
   Widget _searchPageAppBar() {
@@ -286,6 +238,75 @@ class _MyHomePageState extends State<NumberOneClass> {
     );
   }
 
+  Widget _leftBar() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 15,
+                ),
+                child: this._personalProfile(
+                  this._onlineAvatarPath,
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: this._leftBarList(this._leftBarItems, true),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.02,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: AppLibScreen.appBorder(width: 0.9),
+                  ),
+                ),
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.02,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
+                child: this
+                    ._leftBarList(this._leftBarBottomItems, false),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          height: MediaQuery.of(context).size.height * 0.02,
+          decoration: BoxDecoration(
+            border: Border(
+              bottom: AppLibScreen.appBorder(width: 0.9),
+            ),
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.symmetric(
+            vertical: 10,
+            horizontal: 20,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              AppLibScreen.appIcons(Icons.lightbulb_outline_sharp, null, iconColor: Colors.blue, size: 25,),
+              AppLibScreen.appIcons(Icons.qr_code_outlined, null, iconColor: Colors.blue, size: 25,),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     List<Widget> _appBarWidget = [
@@ -301,7 +322,12 @@ class _MyHomePageState extends State<NumberOneClass> {
             return InkWell(
               onTap: () => Scaffold.of(context).openDrawer(),
               child: Container(
-                child: this._appIcons(Icons.menu, null, iconColor: Colors.blue, size: 30),
+                child: AppLibScreen.appIcons(
+                  Icons.menu,
+                  null,
+                  iconColor: Colors.blue,
+                  size: 30,
+                ),
               ),
             );
           },
@@ -320,34 +346,6 @@ class _MyHomePageState extends State<NumberOneClass> {
                 width: MediaQuery.of(context).size.width * 0.75,
                 child: _appBarWidget[this.currentPageIndex],
               ),
-              /*InkWell(
-                onTap: () {
-                  showModalBottomSheet<void>(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Container(
-                          height: 200,
-                          color: Colors.amber,
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                const Text('Modal BottomSheet'),
-                                ElevatedButton(
-                                  child: const Text('Close BottomSheet'),
-                                  onPressed: () => Navigator.pop(context),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-                      });
-                },
-                child: Container(
-                  child: Icon(Icons.settings, color: Colors.blue),
-                ),
-              ),*/
             ],
           ),
         ),
@@ -360,72 +358,7 @@ class _MyHomePageState extends State<NumberOneClass> {
           child: SafeArea(
             child: Container(
               height: MediaQuery.of(context).size.height,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 15,
-                          ),
-                          child: this._personalProfile(
-                            this._onlineAvatarPath,
-                          ),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                          ),
-                          child: this._leftBarList(this._leftBarItems, true),
-                        ),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.02,
-                          decoration: BoxDecoration(
-                            border: Border(
-                              bottom: this._appBorder(width: 0.9),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          height: MediaQuery.of(context).size.height * 0.02,
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 20,
-                          ),
-                          child: this
-                              ._leftBarList(this._leftBarBottomItems, false),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                    decoration: BoxDecoration(
-                      border: Border(
-                        bottom: this._appBorder(width: 0.9),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      vertical: 10,
-                      horizontal: 20,
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        this._appIcons(Icons.lightbulb_outline_sharp, null, iconColor: Colors.blue, size: 25,),
-                        this._appIcons(Icons.qr_code_outlined, null, iconColor: Colors.blue, size: 25,),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              child: this._leftBar(),
             ),
           ),
         ),
@@ -433,12 +366,11 @@ class _MyHomePageState extends State<NumberOneClass> {
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
-            top: this._appBorder(),
+            top: AppLibScreen.appBorder(),
           ),
         ),
         child: BottomNavigationBar(
           onTap: (int index){
-            print("index:$index");
             setState(() {
               this.currentPageIndex = index;
             });
@@ -459,13 +391,4 @@ class _MyHomePageState extends State<NumberOneClass> {
       ),
     );
   }
-}
-
-class LeftBarItems {
-  IconData icon;
-  String leftBarItemsName;
-  String routes;
-  Function onChange;
-
-  LeftBarItems(this.icon, this.leftBarItemsName);
 }
