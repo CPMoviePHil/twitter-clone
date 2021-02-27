@@ -38,7 +38,8 @@ class _MyHomePageState extends State<NumberOneClass> {
   String _stringOfScore = '0.0';
   double _score = 0.0;
   String title1 = "fuck you";
-  String _onlineAvatarPath = 'https://i1.sndcdn.com/artworks-000220681134-i61wr1-t500x500.jpg';
+  String _onlineAvatarPath =
+      'https://i1.sndcdn.com/artworks-000220681134-i61wr1-t500x500.jpg';
 
   List _listOne = [
     ['美國流行音樂流行趨勢', "川普當選", '6.04'],
@@ -48,11 +49,17 @@ class _MyHomePageState extends State<NumberOneClass> {
   ];
 
   List<LeftBarItems> _leftBarItems = [
-    LeftBarItems(Icons.person, "個人資料"),
-    LeftBarItems(Icons.list_alt, "列表"),
-    LeftBarItems(Icons.person, "主題"),
-    LeftBarItems(Icons.person, "書籤"),
-    LeftBarItems(Icons.person, "新聞"),
+    LeftBarItems(Icons.person_outline, "個人資料"),
+    LeftBarItems(Icons.list_alt_outlined, "列表"),
+    LeftBarItems(Icons.chat_outlined, "主題"),
+    LeftBarItems(Icons.bookmark_outline_outlined, "書籤"),
+    LeftBarItems(Icons.electrical_services_outlined, "新聞"),
+    LeftBarItems(Icons.person_add_outlined, "跟隨者請求"),
+  ];
+
+  List<LeftBarItems> _leftBarBottomItems = [
+    LeftBarItems(null, "設定與隱私"),
+    LeftBarItems(null, "說明中心"),
   ];
 
   Widget tutorialOne() {
@@ -225,7 +232,8 @@ class _MyHomePageState extends State<NumberOneClass> {
     );
   }
 
-  Widget _appText(String text, {Color fontColor = Colors.white, double fontSize = 15}){
+  Widget _appText(String text,
+      {Color fontColor = Colors.white, double fontSize = 18}) {
     return Text(
       "$text",
       style: TextStyle(
@@ -235,13 +243,29 @@ class _MyHomePageState extends State<NumberOneClass> {
     );
   }
 
-  Widget _appIcons(IconData icon, Function onChange, {Color iconColor = Colors.white}){
+  Widget _appIcons(
+    IconData icon,
+    Function onChange, {
+    Color iconColor = Colors.white,
+    double size = 20,
+  }) {
     return InkWell(
       onTap: onChange,
       child: Icon(
         icon,
         color: iconColor,
+        size: size,
       ),
+    );
+  }
+
+  BorderSide _appBorder({
+    double width = 0.2,
+    Color color = const Color.fromRGBO(61, 65, 69, 1),
+  }) {
+    return BorderSide(
+      width: width,
+      color: color,
     );
   }
 
@@ -259,7 +283,10 @@ class _MyHomePageState extends State<NumberOneClass> {
           ),
           Container(
             child: ListTileTheme(
-              contentPadding: EdgeInsets.only(right: 0, left: 0,),
+              contentPadding: EdgeInsets.only(
+                right: 0,
+                left: 0,
+              ),
               child: ListTile(
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -267,26 +294,38 @@ class _MyHomePageState extends State<NumberOneClass> {
                     Row(
                       children: [
                         this._appText(
-                          "黃智輝", fontSize: 20,
+                          "黃智輝",
                         ),
-                        this._appIcons(Icons.lock, null),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        this._appIcons(
+                          Icons.lock,
+                          null,
+                        ),
                       ],
                     ),
-                    this._appIcons(Icons.keyboard_arrow_down_sharp, null),
+                    this._appIcons(Icons.keyboard_arrow_down_sharp, null,
+                        iconColor: Colors.blue),
                   ],
                 ),
-                subtitle: this._appText("@cpmoviephil", fontColor: Colors.grey),
+                subtitle: this._appText("@cpmoviephil",
+                    fontColor: Colors.grey, fontSize: 15),
               ),
             ),
           ),
           Container(
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 this._appText("166"),
                 SizedBox(
                   width: 5,
                 ),
-                this._appText("個跟隨中", fontColor: Colors.grey,),
+                this._appText(
+                  "個跟隨中",
+                  fontColor: Colors.grey,
+                ),
                 SizedBox(
                   width: 15,
                 ),
@@ -294,7 +333,10 @@ class _MyHomePageState extends State<NumberOneClass> {
                 SizedBox(
                   width: 5,
                 ),
-                this._appText("個跟隨者", fontColor: Colors.grey,),
+                this._appText(
+                  "個跟隨者",
+                  fontColor: Colors.grey,
+                ),
               ],
             ),
           ),
@@ -303,10 +345,54 @@ class _MyHomePageState extends State<NumberOneClass> {
     );
   }
 
-  Widget _leftBarList() {
+  Widget _leftBarList(List leftBarItems, bool needIcon) {
     return Container(
-      child: ListView.builder(itemBuilder: null),
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: leftBarItems.length,
+        itemBuilder: (context, index) {
+          return _leftBarItemWidget(leftBarItems[index], needIcon);
+        },
+      ),
     );
+  }
+
+  Widget _leftBarItemWidget(LeftBarItems item, bool needIcon) {
+    if (needIcon) {
+      return Container(
+        height: MediaQuery.of(context).size.height * 0.07,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            this._appIcons(
+              item.icon,
+              null,
+              size: 25,
+              iconColor: Colors.grey,
+            ),
+            SizedBox(
+              width: 12,
+            ),
+            this._appText(
+              item.leftBarItemsName,
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        height: MediaQuery.of(context).size.height * 0.07,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            this._appText(
+              item.leftBarItemsName,
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   @override
@@ -325,7 +411,6 @@ class _MyHomePageState extends State<NumberOneClass> {
                       child: Container(
                         child: this._imageContent(this._onlineAvatarPath),
                       ),
-                      //child: this._imageContent(this._onlineAvatarPath),
                     ),
                   ],
                 ),
@@ -412,19 +497,55 @@ class _MyHomePageState extends State<NumberOneClass> {
       drawer: Drawer(
         child: Container(
           color: Colors.black,
-          padding: EdgeInsets.symmetric(horizontal: 20,),
           width: MediaQuery.of(context).size.width * 0.7,
           child: SafeArea(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(
-                    top: 15,
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView(
+                      padding: EdgeInsets.zero,
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 15,
+                          ),
+                          child: this._personalProfile(
+                            this._onlineAvatarPath,
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                          child: this._leftBarList(this._leftBarItems, true),
+                        ),
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.02,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: this._appBorder(width: 0.9),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.02,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
+                          child: this
+                              ._leftBarList(this._leftBarBottomItems, false),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: this._personalProfile(this._onlineAvatarPath,),
-                ),
-              ],
+
+                ],
+              ),
             ),
           ),
         ),
@@ -432,10 +553,7 @@ class _MyHomePageState extends State<NumberOneClass> {
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           border: Border(
-            top: BorderSide(
-              color: Color.fromRGBO(61, 65, 69, 1),
-              width: 0.5,
-            ),
+            top: this._appBorder(),
           ),
         ),
         child: BottomNavigationBar(
@@ -446,19 +564,35 @@ class _MyHomePageState extends State<NumberOneClass> {
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.home, color: Color.fromRGBO(61, 65, 69, 1), size: 36,),
+              icon: Icon(
+                Icons.home,
+                color: Color.fromRGBO(61, 65, 69, 1),
+                size: 36,
+              ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.search, color: Color.fromRGBO(61, 65, 69, 1), size: 36,),
+              icon: Icon(
+                Icons.search,
+                color: Color.fromRGBO(61, 65, 69, 1),
+                size: 36,
+              ),
               label: 'Business',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications, color: Color.fromRGBO(61, 65, 69, 1), size: 36,),
+              icon: Icon(
+                Icons.notifications,
+                color: Color.fromRGBO(61, 65, 69, 1),
+                size: 36,
+              ),
               label: 'School',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.mail_outline, color: Color.fromRGBO(61, 65, 69, 1), size: 36,),
+              icon: Icon(
+                Icons.mail_outline,
+                color: Color.fromRGBO(61, 65, 69, 1),
+                size: 36,
+              ),
               label: 'School',
             ),
           ],
@@ -469,7 +603,7 @@ class _MyHomePageState extends State<NumberOneClass> {
   }
 }
 
-class LeftBarItems{
+class LeftBarItems {
   IconData icon;
   String leftBarItemsName;
   String routes;
