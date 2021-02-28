@@ -6,5 +6,11 @@ class LeftBarItems {
   String routes;
   Function onChange;
 
-  LeftBarItems(this.icon, this.leftBarItemsName);
+  LeftBarItems(this.icon, this.leftBarItemsName,);
+}
+
+class PageBar {
+  String pageBarLabel;
+  double fontSize;
+  PageBar(this.pageBarLabel, this.fontSize,);
 }
