@@ -1,26 +1,22 @@
-import 'package:first_flutter/libs_main/packigist.dart';
+import 'package:first_flutter/libs_main/common_package.dart';
 import 'package:first_flutter/libs_main/libs_export.dart';
-import 'package:first_flutter/models/export_class.dart';
+import 'unhidden_left.dart';
+import 'hidden_left.dart';
+import 'left_bottom.dart';
 
-class LeftBarScreen extends StatelessWidget {
+class LeftBarScreen extends StatefulWidget {
+  @override
+  _LeftBarScreen createState() {
+    return _LeftBarScreen();
+  }
+}
 
-  final List<LeftBarItems> _leftBarItems = [
-    LeftBarItems(Icons.person_outline, "個人資料"),
-    LeftBarItems(Icons.list_alt_outlined, "列表"),
-    LeftBarItems(Icons.chat_outlined, "主題"),
-    LeftBarItems(Icons.bookmark_outline_outlined, "書籤"),
-    LeftBarItems(Icons.electrical_services_outlined, "新聞"),
-    LeftBarItems(Icons.person_add_outlined, "跟隨者請求"),
-  ];
-
-  final List<LeftBarItems> _leftBarBottomItems = [
-    LeftBarItems(null, "設定與隱私"),
-    LeftBarItems(null, "說明中心"),
-  ];
+class _LeftBarScreen extends State<LeftBarScreen> {
 
   final String _onlineAvatarPath = 'https://i1.sndcdn.com/artworks-000220681134-i61wr1-t500x500.jpg';
+  bool isHidden = false;
 
-  Widget personalProfile(String onlineImage) {
+  Widget personalProfile() {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,8 +36,10 @@ class LeftBarScreen extends StatelessWidget {
                   children: [
                     this.loginNameAndAccountStatus(),
                     AppLibScreen.appIcons(
-                      Icons.keyboard_arrow_down_sharp,
-                      null,
+                      isHidden
+                          ? Icons.keyboard_arrow_up_sharp
+                          : Icons.keyboard_arrow_down_sharp,
+                      changeState,
                       iconColor: Colors.blue,
                     ),
                   ],
@@ -120,54 +118,14 @@ class LeftBarScreen extends StatelessWidget {
     );
   }
 
-  Widget leftBarList(mainScreenContext, List leftBarItems, bool needIcon) {
-    return Container(
-      child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        itemCount: leftBarItems.length,
-        itemBuilder: (context, index) {
-          return leftBarItemWidget(mainScreenContext, leftBarItems[index], needIcon);
-        },
-      ),
-    );
-  }
-
-  Widget leftBarItemWidget(context, LeftBarItems item, bool needIcon) {
-    if (needIcon) {
-      return Container(
-        height: MediaQuery.of(context).size.height * 0.07,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            AppLibScreen.appIcons(
-              item.icon,
-              null,
-              size: 25,
-              iconColor: Colors.grey,
-            ),
-            SizedBox(
-              width: 12,
-            ),
-            AppLibScreen.appText(
-              item.leftBarItemsName,
-            ),
-          ],
-        ),
-      );
-    } else {
-      return Container(
-        height: MediaQuery.of(context).size.height * 0.07,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            AppLibScreen.appText(
-              item.leftBarItemsName,
-            ),
-          ],
-        ),
-      );
-    }
+  void changeState(){
+    setState(() {
+      if (this.isHidden) {
+        this.isHidden = false;
+      } else {
+        this.isHidden = true;
+      }
+    });
   }
 
   @override
@@ -184,57 +142,15 @@ class LeftBarScreen extends StatelessWidget {
                   horizontal: 20,
                   vertical: 15,
                 ),
-                child: this.personalProfile(
-                  this._onlineAvatarPath,
-                ),
+                child: this.personalProfile(),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                child: this.leftBarList(context, this._leftBarItems, true),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.02,
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: AppLibScreen.appBorder(width: 0.9),
-                  ),
-                ),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.02,
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                ),
-                child: this.leftBarList(context, this._leftBarBottomItems, false),
-              ),
+              (this.isHidden) ? HiddenLeft(): UnhiddenLeft() ,
             ],
           ),
         ),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.02,
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: AppLibScreen.appBorder(width: 0.9),
-            ),
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 20,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              AppLibScreen.appIcons(Icons.lightbulb_outline_sharp, null, iconColor: Colors.blue, size: 25,),
-              AppLibScreen.appIcons(Icons.qr_code_outlined, null, iconColor: Colors.blue, size: 25,),
-            ],
-          ),
-        ),
+        this.isHidden
+            ? Container()
+            : LeftBottom(),
       ],
     );
   }

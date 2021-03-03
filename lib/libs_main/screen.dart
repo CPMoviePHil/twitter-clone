@@ -1,4 +1,5 @@
-import 'packigist.dart';
+import 'common_package.dart';
+import 'package:first_flutter/models/export_class.dart';
 
 class AppLibScreen {
 
@@ -54,6 +55,56 @@ class AppLibScreen {
       placeholder: (context, url) => CircularProgressIndicator(),
       errorWidget: (context, url, error) => Icon(Icons.error),
     );
+  }
+
+  static Widget leftBarList(context, List leftBarItems, bool needIcon) {
+    return Container(
+      child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        itemCount: leftBarItems.length,
+        itemBuilder: (context, index) {
+          return leftBarItemWidget(context, leftBarItems[index], needIcon);
+        },
+      ),
+    );
+  }
+
+  static Widget leftBarItemWidget(context, LeftBarItems item, bool needIcon) {
+    if (needIcon) {
+      return Container(
+        height: MediaQuery.of(context).size.height * 0.07,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AppLibScreen.appIcons(
+              item.icon,
+              null,
+              size: 25,
+              iconColor: Colors.grey,
+            ),
+            SizedBox(
+              width: 12,
+            ),
+            AppLibScreen.appText(
+              item.leftBarItemsName,
+            ),
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        height: MediaQuery.of(context).size.height * 0.07,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            AppLibScreen.appText(
+              item.leftBarItemsName,
+            ),
+          ],
+        ),
+      );
+    }
   }
 
   static final AppLibScreen _instance = AppLibScreen._internal();

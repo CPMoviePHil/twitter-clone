@@ -1,4 +1,4 @@
-import 'package:first_flutter/libs_main/packigist.dart';
+import 'package:first_flutter/libs_main/common_package.dart';
 import 'package:first_flutter/screens/export_screen.dart';
 import 'package:first_flutter/libs_main/libs_export.dart';
 import 'package:first_flutter/models/screens/navigation.dart';
@@ -43,6 +43,8 @@ class _EntryPointState extends State<EntryPointClass> {
     PageBar('通知', 25,),
     PageBar('信箱', 25,),
   ];
+
+
 
   TextEditingController _textEditingController = new TextEditingController();
 
