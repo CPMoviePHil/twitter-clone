@@ -87,7 +87,7 @@ class _LeftBarScreen extends State<LeftBarScreen> {
     return AppLibScreen.appText(
       "@cpmoviephil",
       fontColor: Colors.grey,
-      fontSize: 15,
+      textSize: "small",
     );
   }
 

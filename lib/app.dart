@@ -38,13 +38,11 @@ class _EntryPointState extends State<EntryPointClass> {
   ];
 
   List _pageAppBarContent = [
-    PageBar('首頁', 25,),
-    PageBar('搜尋', 25,),
-    PageBar('通知', 25,),
-    PageBar('信箱', 25,),
+    PageBar('首頁'),
+    PageBar('搜尋'),
+    PageBar('通知'),
+    PageBar('信箱'),
   ];
-
-
 
   TextEditingController _textEditingController = new TextEditingController();
 
@@ -65,7 +63,7 @@ class _EntryPointState extends State<EntryPointClass> {
     } else {
       return AppLibScreen.appText(
         appContent.pageBarLabel,
-        fontSize: appContent.fontSize,
+        textSize: "large",
       );
     }
   }
@@ -118,7 +116,7 @@ class _EntryPointState extends State<EntryPointClass> {
                   Icons.menu,
                   null,
                   iconColor: Colors.blue,
-                  size: 30,
+                  iconSize: "large",
                 ),
               ),
             );

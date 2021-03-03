@@ -18,7 +18,22 @@ class AppLibScreen {
       Function onChange, {
         Color iconColor = Colors.white,
         double size = 20,
+        String iconSize = "medium",
       }) {
+    switch(iconSize){
+      case "large":
+        size = 30;
+        break;
+      case "small":
+        size = 15;
+        break;
+      case "medium":
+        size = 25;
+        break;
+      default :
+        size = 20;
+        break;
+    }
     return InkWell(
       onTap: onChange,
       child: Icon(
@@ -29,7 +44,19 @@ class AppLibScreen {
     );
   }
 
-  static Widget appText(String text, {Color fontColor = Colors.white, double fontSize = 18}) {
+  static Widget appText(String text, {Color fontColor = Colors.white, double fontSize = 18, String textSize = 'medium',}) {
+    switch(textSize){
+      case "large":
+        fontSize = 25;
+        break;
+      case "small":
+        fontSize = 15;
+        break;
+      case "medium":
+      default :
+        fontSize = 18;
+        break;
+    }
     return Text(
       "$text",
       style: TextStyle(
@@ -80,7 +107,7 @@ class AppLibScreen {
             AppLibScreen.appIcons(
               item.icon,
               null,
-              size: 25,
+              iconSize: "medium",
               iconColor: Colors.grey,
             ),
             SizedBox(

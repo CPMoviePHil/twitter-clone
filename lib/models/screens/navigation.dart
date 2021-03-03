@@ -12,5 +12,5 @@ class LeftBarItems {
 class PageBar {
   String pageBarLabel;
   double fontSize;
-  PageBar(this.pageBarLabel, this.fontSize,);
+  PageBar(this.pageBarLabel);
 }

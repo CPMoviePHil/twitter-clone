@@ -22,8 +22,8 @@ class LeftBottom extends StatelessWidget{
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              AppLibScreen.appIcons(Icons.lightbulb_outline_sharp, null, iconColor: Colors.blue, size: 25,),
-              AppLibScreen.appIcons(Icons.qr_code_outlined, null, iconColor: Colors.blue, size: 25,),
+              AppLibScreen.appIcons(Icons.lightbulb_outline_sharp, null, iconColor: Colors.blue, iconSize: "medium",),
+              AppLibScreen.appIcons(Icons.qr_code_outlined, null, iconColor: Colors.blue, iconSize: "medium",),
             ],
           ),
         ),
