@@ -1,7 +1,7 @@
-import 'package:first_flutter/main_lib/common_screen_package.dart';
-import 'package:first_flutter/main_screen/export_screen.dart';
-import 'package:first_flutter/main_lib/export_lib.dart';
-import 'package:first_flutter/models/screens/navigation_screens.dart';
+import 'package:first_flutter/libs_main/packigist.dart';
+import 'package:first_flutter/screens/export_screen.dart';
+import 'package:first_flutter/libs_main/libs_export.dart';
+import 'package:first_flutter/models/screens/navigation.dart';
 
 class App extends StatelessWidget {
   @override

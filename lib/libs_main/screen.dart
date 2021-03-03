@@ -1,4 +1,4 @@
-import 'common_screen_package.dart';
+import 'packigist.dart';
 
 class AppLibScreen {
 

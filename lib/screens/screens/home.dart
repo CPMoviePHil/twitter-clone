@@ -1,4 +1,4 @@
-import 'package:first_flutter/main_lib/common_screen_package.dart';
+import 'package:first_flutter/libs_main/packigist.dart';
 
 class HomePage extends StatefulWidget {
   @override

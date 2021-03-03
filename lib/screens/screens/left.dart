@@ -1,5 +1,5 @@
-import 'package:first_flutter/main_lib/common_screen_package.dart';
-import 'package:first_flutter/main_lib/export_lib.dart';
+import 'package:first_flutter/libs_main/packigist.dart';
+import 'package:first_flutter/libs_main/libs_export.dart';
 import 'package:first_flutter/models/export_class.dart';
 
 class LeftBarScreen extends StatelessWidget {
