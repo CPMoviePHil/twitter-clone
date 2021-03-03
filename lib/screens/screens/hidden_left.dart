@@ -14,17 +14,6 @@ class HiddenLeft extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: MediaQuery.of(context).size.height * 0.02,
-          decoration: BoxDecoration(
-            border: Border(
-              bottom: AppLibScreen.appBorder(width: 0.9),
-            ),
-          ),
-        ),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.02,
-        ),
-        Container(
           padding: EdgeInsets.symmetric(
             horizontal: 20,
           ),

@@ -10,7 +10,7 @@ class LeftBottom extends StatelessWidget{
           height: MediaQuery.of(context).size.height * 0.02,
           decoration: BoxDecoration(
             border: Border(
-              bottom: AppLibScreen.appBorder(width: 0.9),
+              bottom: AppLibScreen.appBorder(),
             ),
           ),
         ),

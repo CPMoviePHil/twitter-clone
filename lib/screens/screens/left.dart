@@ -144,6 +144,14 @@ class _LeftBarScreen extends State<LeftBarScreen> {
                 ),
                 child: this.personalProfile(),
               ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.02,
+                decoration: BoxDecoration(
+                  border: Border(
+                    bottom: AppLibScreen.appBorder(),
+                  ),
+                ),
+              ),
               (this.isHidden) ? HiddenLeft(): UnhiddenLeft() ,
             ],
           ),

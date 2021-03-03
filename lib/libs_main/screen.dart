@@ -93,7 +93,7 @@ class AppLibScreen {
   static Widget leftBarItemWidget(context, LeftBarItems item, bool needIcon, bool isRoute) {
     if (needIcon) {
       return Container(
-        height: MediaQuery.of(context).size.height * 0.07,
+        height: MediaQuery.of(context).size.height * 0.065,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -113,7 +113,7 @@ class AppLibScreen {
       );
     } else {
       return Container(
-        height: MediaQuery.of(context).size.height * 0.07,
+        height: MediaQuery.of(context).size.height * 0.065,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -122,6 +122,9 @@ class AppLibScreen {
               fontColor: isRoute
                   ? Colors.blue
                   : Colors.white,
+                textSize: isRoute
+                  ? "small"
+                  : "medium",
             ),
           ],
         ),
