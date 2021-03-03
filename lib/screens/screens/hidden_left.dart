@@ -28,7 +28,11 @@ class HiddenLeft extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal: 20,
           ),
-          child: AppLibScreen.leftBarList(context, this._leftBarItems, false),
+          child: AppLibScreen.leftBarList(
+            context,
+            this._leftBarItems,
+            isRoute: true,
+          ),
         ),
       ],
     );

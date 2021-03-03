@@ -3,23 +3,15 @@ import 'package:first_flutter/models/export_class.dart';
 
 class AppLibScreen {
 
-  static BorderSide appBorder({
-    double width = 0.2,
-    Color color = const Color.fromRGBO(61, 65, 69, 1),
-  }) {
+  static BorderSide appBorder({double width = 0.2, Color color = const Color.fromRGBO(61, 65, 69, 1),}) {
     return BorderSide(
       width: width,
       color: color,
     );
   }
 
-  static Widget appIcons(
-      IconData icon,
-      Function onChange, {
-        Color iconColor = Colors.white,
-        double size = 20,
-        String iconSize = "medium",
-      }) {
+  static Widget appIcons(IconData icon, Function onChange,
+      {Color iconColor = Colors.white, double size = 20, String iconSize = "medium",}) {
     switch(iconSize){
       case "large":
         size = 30;
@@ -84,20 +76,21 @@ class AppLibScreen {
     );
   }
 
-  static Widget leftBarList(context, List leftBarItems, bool needIcon) {
+  static Widget leftBarList(context, List leftBarItems,
+      {bool needIcon=false, bool isRoute=false}) {
     return Container(
       child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         itemCount: leftBarItems.length,
         itemBuilder: (context, index) {
-          return leftBarItemWidget(context, leftBarItems[index], needIcon);
+          return leftBarItemWidget(context, leftBarItems[index], needIcon, isRoute);
         },
       ),
     );
   }
 
-  static Widget leftBarItemWidget(context, LeftBarItems item, bool needIcon) {
+  static Widget leftBarItemWidget(context, LeftBarItems item, bool needIcon, bool isRoute) {
     if (needIcon) {
       return Container(
         height: MediaQuery.of(context).size.height * 0.07,
@@ -108,7 +101,6 @@ class AppLibScreen {
               item.icon,
               null,
               iconSize: "medium",
-              iconColor: Colors.grey,
             ),
             SizedBox(
               width: 12,
@@ -127,6 +119,9 @@ class AppLibScreen {
           children: [
             AppLibScreen.appText(
               item.leftBarItemsName,
+              fontColor: isRoute
+                  ? Colors.blue
+                  : Colors.white,
             ),
           ],
         ),
@@ -139,5 +134,6 @@ class AppLibScreen {
   factory AppLibScreen() {
     return _instance;
   }
+
   AppLibScreen._internal();
 }

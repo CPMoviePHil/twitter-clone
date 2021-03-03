@@ -26,7 +26,7 @@ class UnhiddenLeft extends StatelessWidget{
           padding: EdgeInsets.symmetric(
             horizontal: 20,
           ),
-          child: AppLibScreen.leftBarList(context, this._leftBarItems, true),
+          child: AppLibScreen.leftBarList(context, this._leftBarItems, needIcon: true),
         ),
         Container(
           height: MediaQuery.of(context).size.height * 0.02,
@@ -43,7 +43,7 @@ class UnhiddenLeft extends StatelessWidget{
           padding: EdgeInsets.symmetric(
             horizontal: 20,
           ),
-          child: AppLibScreen.leftBarList(context, this._leftBarBottomItems, false),
+          child: AppLibScreen.leftBarList(context, this._leftBarBottomItems),
         ),
       ],
     );
